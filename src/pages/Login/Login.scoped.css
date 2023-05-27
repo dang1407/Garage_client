@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap');
+
+
+* {
+      margin: 0px;
+      padding: 0px;
+      box-sizing: border-box;
+}
+
+/* Button hover */
+
+.btn-hover:hover{
+      box-shadow: 0 0 10px #04a845;
+}
+
+.flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.login-container {
+      height: 722px;
+      background-image: url('../../assets/images/bg_login.png');
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+}
+
+.form-container {
+      width: 1000px;
+      height: 500px;
+      background-color: #FFF;
+      border-radius: 20px;
+      display: flex;
+}
+
+.form-box {
+     
+}
+
+.login-form {
+      width: 500px;
+      margin-left: 50px;
+      padding: 20px;
+}
+
+.login-box {
+      display: flex;
+      flex-direction: column;
+}
+
+.login-head {
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 25px;
+      font-weight: 600;
+      margin: 20px 0;
+      font-family: 'Poppins', sans-serif;
+}
+
+.image-box {
+      border-radius: 20px;
+      width: 500px;
+      height: 500px;
+      background-image: url('../../assets/images/thumb_login.png');
+      background-position: center;
+      /* object-fit: cover; */
+}
+
+.input-box {
+      padding: 20px;
+      display: flex;
+      /* background-color: #ccc; */
+}
+
+.input-box span {
+      /* margin-top: -30px; */
+      font-size: 30px;
+      padding: 10px;
+      margin-right: -70px;
+      z-index: 3;
+}
+
+.input-box input {
+      padding: 15px 25px 15px 75px;
+      width: 100%;
+      height: 50px;
+      border-radius: 100px;
+      background-color: #ccc;
+      z-index: 2;
+      border: none;
+      outline: none;
+}
+
+.login-button {
+      /* margin-right: 20px; */
+      text-align: center;
+      width: 420px;
+      height: 50px;
+      background-color: #04a845;
+      border-radius: 100px;
+      margin: 20px 0;
+      text-transform: uppercase;
+      color: #fff;
+}
+
+.login-button:hover {
+      box-shadow: 0 0 10px #04a845;
+}
+
+.forgot-password {
+      text-align: center;
+}
+
+.forgot-password a {
+      color: rgb(0, 156, 246);
+}
+
+.create-acc {
+      width: 500px;
+      margin-left: 50px;
+      padding: 20px;
+      text-align: center;
+}
+
+.create-acc a:hover {
+      color: #04a845;
+}

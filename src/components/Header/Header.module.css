@@ -1,0 +1,70 @@
+:root {
+      --home-btn-height: 32px;
+      --home-slider-btn: 50px;
+}
+
+header {
+      background-color: #000;
+}
+
+.homeLogoBox img {
+      width: 64px;
+      height: 64px;
+}
+
+.homeTextCenter {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.homeLoginBox a{
+
+}
+
+.homeLoginUser {
+      color: #ffffff;
+      font-size: 32px;
+      /* margin-top: -8px; */
+}
+
+.nav {
+      color: #fff;
+}
+
+/* Thẻ more và subnav */
+#homeMore {
+      position: relative;
+}
+
+.homeSubnav {
+      z-index: 5;
+      display: none;
+      position: absolute;
+      top: 64px;
+      width: 250px;
+      background-color: #000;
+      /* background-color: #fff; */
+}
+
+.homeSubnav li {
+      width: 100%;
+      height: var(--home-btn-height);
+}
+
+.homeSubnav li a{
+      padding-left: 8px;
+      display: block;
+      width: 100%;
+      height: var(--home-btn-height);
+      line-height: var(--home-btn-height);
+      justify-content: flex-start;
+}
+
+.homeSubnav li a:hover{
+      background-color: #43a809;
+}
+
+#homeMore:hover .homeSubnav{
+      display: block;
+}
