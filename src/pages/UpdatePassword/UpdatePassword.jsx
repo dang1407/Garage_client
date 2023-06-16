@@ -15,7 +15,7 @@ const UpdatePassword = () => {
       return;
     }
     
-    const respone = await axios.put('http://localhost:5000/updateacc', {
+    const respone = await axios.put('http://localhost:5000/api/updateacc', {
       email,
       password
     })

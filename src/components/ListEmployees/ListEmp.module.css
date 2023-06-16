@@ -1,3 +1,93 @@
 :root {
-      
+    --list-item-box-width: 400px;  
+    --list-item-box-height: 200px;
+}
+
+.listEmpContainer {
+      position: relative;
+      height: 100vh;
+}
+
+.tableContainer{
+      border: 1px solid #ccc;
+      width: 800px;
+      position: absolute;
+      top: 50%;
+      /* height: 800px; */
+      transform: translateY(-50%);
+}
+
+.tableContainer tr {
+      /* width: 500px; */
+      /* height: var(--list-item-box-height); */
+}
+
+.tableContainer td {
+      /* width: 500px; */
+      display: inline-block;
+}
+
+.listItemBox {
+      width: 800px;
+      height: 100px;
+      background-color: bisque;
+      display: flex;
+}
+
+.listItemBox img {
+      height: 100%;
+}
+
+.imagePersonBox {
+      width: 100px;
+      height: 100px;
+      border-radius: 100px;
+      background-color: #fff;
+      margin: 0 10px;
+}
+
+.infoBox {
+      margin-left: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start; */
+}
+
+.infoBox h1 {
+      font-weight: 600;
+}
+
+.work {
+      margin: 0 10px;
+}
+
+
+.buttonBox {
+
+}
+
+.buttonBox a {
+      width: 80px;
+      height: 40px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 0 10px;
+}
+
+.updateButton {
+      background-color: rgb(45, 127, 194);
+}
+
+.updateButton:hover {
+      background-color: orange;
+      color: #fff;
+}
+
+.deleteButton {
+      background-color: rgb(236, 109, 74);
+
 }

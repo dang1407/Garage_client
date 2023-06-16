@@ -6,7 +6,11 @@ const DeleteAcc = () => {
       async function deleteUser(event){
             event.preventDefault();
             console.log(email);
-            const respone = await axios.delete(`http://localhost:5000/deleteacc/${email}`);
+            const respone = await axios.delete(`http://localhost:5000/api/deleteacc`, {
+              body: {
+                email: email
+              }
+            });
             console.log(respone.data.status);
             if(respone.data.status === "OK"){
                   alert("Xóa thành công");
