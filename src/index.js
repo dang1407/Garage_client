@@ -10,18 +10,23 @@ import UpdatePassword from './pages/UpdatePassword/UpdatePassword';
 import DeleteAcc from './pages/DeleteAcc/DeleteAcc';
 import Home from './pages/Home/Home';
 import ListEmployees from './components/ListEmployees/ListEmployees';
+import AppWrapper from './Token/AppWrapper';
+import EmployeeInf from './components/ListEmployees/EmployeeInf'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+    <AppWrapper>
       <Routes>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register/>}></Route>
         <Route path='/updateacc' element={<UpdatePassword/>}></Route>
-        <Route path='deleteacc' element={<DeleteAcc />}></Route>
-        <Route path='listemployees' element={<ListEmployees />}></Route>
+        <Route path='/deleteacc' element={<DeleteAcc />}></Route>
+        <Route path='/listemployees' element={<ListEmployees />}></Route>
+        <Route path='/employeeinf' element={<EmployeeInf />} ></Route>
         <Route path='/' element={<Home />}></Route>
       </Routes>
+      </AppWrapper>
     </BrowserRouter>
   </React.StrictMode>
 );

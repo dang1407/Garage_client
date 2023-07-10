@@ -5,6 +5,10 @@ import './ForgotPassword.css'
 const ForgotPassword = ({onClose}) => {
   const [forgotEmail, setForgotEmail] = useState();
 
+  function notSubmitForm(e){
+    e.preventDefault();
+  }
+
   return (
     <div className="fgpw-container flex-center">
       <div className="fg-password flex-center">
@@ -27,7 +31,7 @@ const ForgotPassword = ({onClose}) => {
             <input type="email" required id="fg-email" placeholder="Email" />
           </div>
           <div className="fgpw-button">
-              <button className="login-button">Send Request</button>
+              <button className="login-button" onClick={notSubmitForm}>Send Request</button>
             </div>
         </form>
       </div>

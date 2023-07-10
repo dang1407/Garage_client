@@ -1,18 +1,23 @@
-import React from 'react';
-import {Link,Routes, Route, Navigate} from 'react-router-dom';
+import React, { useContext } from 'react';
+import {Link, Navigate, useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 import './Login.scoped.css';
 import {AiOutlineMail} from 'react-icons/ai';
 import {RiLockPasswordLine} from 'react-icons/ri'
 // import component
 import ForgotPassword from './ForgotPassword.jsx/ForgotPassword';
-
+import LoginFailed from './LoginFailed/LoginFailed';
+import AccessTokenContext from '../../Token/AccessTokenContext';
 const Login = () => {
-
+  const navigate = useNavigate()
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [isLogined, setIsLogined] = useState(0);
   const [fgPassword, setFgPassword] = useState(false);
+  const [loginFailed, setLoginFailed] = useState(false);
+  const {handleLogin} = useContext(AccessTokenContext);
+  const [accessToken, setAccessToken] = useState(null);
+  const [role, setRole] = useState();
   async function loginUser(event){
     event.preventDefault();
 
@@ -29,12 +34,20 @@ const Login = () => {
 
     // Phải có await mới lấy ra được status -_-
     const data = await respone.json();
+    console.log(data)
     if(data.status === "OK"){
-      setIsLogined(true);
+      localStorage.setItem("accessToken",data.accessToken);
+       setIsLogined(true);
+      setRole(data.role)
+      handleLogin(data.accessToken, data.role)
+      setAccessToken(data.accessToken)
+    } else if(data.status === "error"){
+      setLoginFailed(true);
     }
   }
 
-  function handleFgPassword(){
+  function handleFgPassword(e){
+    e.preventDefault()
     setFgPassword(true)
   }
 
@@ -42,8 +55,13 @@ const Login = () => {
     setFgPassword(false)
   }
 
+
+  function closeLoginFailed(){
+    setLoginFailed(false)
+  }
   if(isLogined === true){
-    return <Navigate to='/'></Navigate>
+    navigate('/', {state: {accessToken, role}})
+    // return <Navigate to='/' {state: {accessToken}}></Navigate>
   }
 
   return (
@@ -89,7 +107,8 @@ const Login = () => {
               </div>
               <button className='login-button' onClick={loginUser}>Login</button>
               <div className="forgot-password">
-                <p > Forgot <Link to='/updateacc'>password</Link></p>
+                {/* <p > Forgot <Link to='/updateacc'>password</Link></p> */}
+                <button onClick={handleFgPassword}>Forgot password</button>
                 {/* <p>Forgot <a onClick={handleFgPassword} style={{cursor: 'pointer'}}>password</a></p> */}
               </div>
           
@@ -103,8 +122,11 @@ const Login = () => {
       </div>
       {
         fgPassword && 
-        <ForgotPassword onClose = {closeFgPassword}/>
-        
+        <ForgotPassword onClose={closeFgPassword}/>
+      }
+
+      {
+        loginFailed && <LoginFailed onClose={closeLoginFailed} />
       }
 
     </div>

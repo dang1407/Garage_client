@@ -1,10 +1,16 @@
 import React from 'react'
 import logoHome from '../../assets/images/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {FaUserCircle, FaAngleDown} from 'react-icons/fa';
 import styles from './Header.module.css';
-const Header = () => {
+import AccessTokenContext from '../../Token/AccessTokenContext';
+const Header = ({isLogined, isAdmin, accessToken, role}) => {
+  const navigate = useNavigate();
+  function handleGoToListEmployee(){
+    navigate('/listemployees', {state: {accessToken}})
+  }
   return (
+    // <AccessTokenContext.Consumer>
       <header className='flex justify-between uppercase'>
       {/* Begin nav - Flex item 1 */}
       <div className='flex'>
@@ -24,6 +30,10 @@ const Header = () => {
               <li className={`${styles.homeTextCenter}`}><a href="#"className=' h-6 inline-block'>Liên hệ</a></li>
               <li className={`${styles.homeTextCenter}`}><a href="#"className=' h-6 inline-block'>Địa chỉ</a></li>
               <li className={`${styles.homeTextCenter}`}><a href="#"className=' h-6 inline-block'>Phương hướng phát triển</a></li>
+              {
+                (role === 'admin') &&
+                <li className={`${styles.homeTextCenter}`}><div onClick={handleGoToListEmployee} className=' h-6 inline-block'>Danh sách nhân viên</div></li>
+              }
             </ul>
           </li>
         </ul>
@@ -37,15 +47,16 @@ const Header = () => {
       {/*  Beign Account - Flex item */}
       <div className={`${styles.homeTextCenter} ${styles.homeAccount} h-16`}>
         <div className={`${styles.homeLoginBox} flex`}>
-          <Link to='/login' className={`${styles.homeLoginUser} ${styles.homeTextCenter} mx-8 h-16`}>
-            <FaUserCircle/>
-            {/* <IoNotificationsCircle /> */}
-          </Link>
-          {/* <Link className='inline-block p-2 home-text-center mx-3'>Login</Link> */}
+          {
+          
+              isLogined === true ?   <FaUserCircle/> :
+              <Link className='inline-block p-2 home-text-center mx-3 loginButton' to='/login'>Login</Link>
+            }
         </div>
       </div>
       {/*  End  */}
     </header>
+    // </AccessTokenContext.Consumer>
   )
 }
 

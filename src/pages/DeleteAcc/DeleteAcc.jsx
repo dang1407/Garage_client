@@ -1,25 +1,35 @@
-import React from 'react'
-import { useState } from 'react';
-import axios from 'axios';
+import React from "react";
+import { useState } from "react";
+import axios from "axios";
 const DeleteAcc = () => {
-      const [email, setEmail] = useState();
-      async function deleteUser(event){
-            event.preventDefault();
-            console.log(email);
-            const respone = await axios.delete(`http://localhost:5000/api/deleteacc`, {
-              body: {
-                email: email
-              }
-            });
-            console.log(respone.data.status);
-            if(respone.data.status === "OK"){
-                  alert("Xóa thành công");
-            } else {
-                  // alert("Tài khoản không tồn tại");
-            }
+  const [email, setEmail] = useState();
+  async function deleteUser(event) {
+    event.preventDefault();
+    console.log(email);
+    const respone = await axios.delete(`http://localhost:5000/api/deleteacc/${email}`, {
+      body: {
+        email: email
       }
+    });
+
+    // const respone = await axios.post("http://localhost:5000/api/deleteacc", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     email,
+    //   }),
+    // });
+    console.log(respone.data.status);
+    if (respone.data.status === "OK") {
+      alert("Xóa thành công");
+    } else {
+      // alert("Tài khoản không tồn tại");
+    }
+  }
   return (
-    <div className='del-container'>
+    <div className="del-container">
       <form action="" className="login-form">
         {/* Login box */}
         <div className="login-box">
@@ -28,14 +38,12 @@ const DeleteAcc = () => {
             <div className="up-ip-box">
               <label htmlFor="">Email</label>
               <input
-              value={email}
+                value={email}
                 type="email"
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-
-            
           </div>
           <button
             className="login-button"
@@ -47,7 +55,7 @@ const DeleteAcc = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default DeleteAcc
+export default DeleteAcc;

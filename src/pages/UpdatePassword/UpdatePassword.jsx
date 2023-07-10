@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, Routes, Route, Navigate } from "react-router-dom";
 import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import "./UpdatePassword.css";
 import axios from "axios";
+import AccessTokenContext from "../../Token/AccessTokenContext";
+
+
 const UpdatePassword = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [rePassword, setRePassword] = useState();
+  const {accessToken} = useContext(AccessTokenContext)
+  console.log(accessToken)
   async function updateUser(event) {
     event.preventDefault();
     if (password !== rePassword) {
@@ -18,6 +23,10 @@ const UpdatePassword = () => {
     const respone = await axios.put('http://localhost:5000/api/updateacc', {
       email,
       password
+    }, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
     })
 
     console.log(respone.data.status);

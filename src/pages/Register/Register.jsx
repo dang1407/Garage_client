@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
 import './Register.scoped.css'
 import { Navigate } from 'react-router-dom';
-import $ from 'jquery';
 const Register = () => {
-      const [email, setEmail] = useState();
-      const [password, setPassword] = useState();
-      const [name, setName] = useState();
-      const [regSuccess, setRegSucces] = useState();
+      const [email, setEmail] = useState("");
+      const [password, setPassword] = useState("");
+      const [firstName, setFirstName] = useState("");
+      const [lastName, setLastName] = useState("");
+      const [regSuccess, setRegSucces] = useState(false);
+      const [mobile, setMobile] = useState("");
+      const [workPart, setWorkPart] = useState("");
+      const [work, setWork] = useState();
+      const [licensePlates, setLicensePlates] = useState("");
+      const [employeeCode, setEmployeeCode] = useState("");
       async function registerUser(event){
             event.preventDefault();
-            
+            const name = firstName + lastName;
             const respone = await fetch('http://localhost:5000/api/register', {
                   method: "POST",
                   headers: {
@@ -18,15 +23,21 @@ const Register = () => {
                   body: JSON.stringify({
                         name,
                         email,
-                        password
+                        password,
+                        mobile,
+                        workPart,
+                        licensePlates,
+                        employeeCode, 
+                        work   
                   })
             })
 
             const data = await respone.json();
-            if(data.status === "OK"){
+            console.log(data)
+            if(data.mes === "Register successfull! Please go to login"){
                 setRegSucces(true);
             } else {
-                  alert("Email đã tồn tại");
+                  alert(data.message);
             }
       }
 
@@ -47,6 +58,7 @@ const Register = () => {
                                     type="email" 
                                     placeholder='Email' 
                                     name='email' 
+                                    value={email}
                                     onChange = {(e) => setEmail(e.target.value)}
                               />
                         </div>
@@ -64,25 +76,33 @@ const Register = () => {
 
                         <div className="name-box">
                               <input 
-                                    requiredtype="text" required placeholder='Họ và tên đệm' name='hoDem'/>
+                                    requiredtype="text" required placeholder='Họ và tên đệm' name='hoDem'
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    />
                               <input 
                                     required
                                     type="text" 
                                     placeholder='Tên' 
                                     name='ten' 
-                                    value={name}
-                                    onChange = {(e) => setName(e.target.value)}
+                                    value={lastName}
+                                    onChange = {(e) => setLastName(e.target.value)}
                                     />
                         </div>
                         <div className="rg-input-box">
                               {/* <label htmlFor="">Phone Number</label> */}
                               <input 
-                                    type="text" required placeholder='Số điện thoại' name='phone'/>
+                                    type="text" required value={mobile} placeholder='Số điện thoại' name='phone'
+                                    onChange={(e) => setMobile(e.target.value)}
+                                    />
                         </div>
 
                         <div className="rg-input-box">
                               {/* <label htmlFor="workPart">Bộ phận làm việc</label> */}
-                              <select name="workPart" id="" style={{color: '#888'}}>
+                              <select 
+                                    name="workPart" id="" style={{color: '#888'}}
+                                    onChange={(e) => setWorkPart(e.target.value)}
+                                    >
                                     <option value="" >--- Bộ phận làm việc ---</option>
                                     <option value="Hành chính">Hành chính</option>
                                     <option value="Kỹ thuật">Kỹ thuật</option>
@@ -94,11 +114,29 @@ const Register = () => {
                         <div className="rg-input-box">
                               {/* <label htmlFor="">Phone Number</label> */}
                               <input 
-                                    requiredtype="text" required placeholder='Mã nhân viên' name='maNV'/>
+                                    requiredtype="text" required placeholder='Vị trí làm việc' name='vitri'
+                                    onChange={(e) => setWork(e.target.value)}
+                                    value={work}
+                                    />
+                        </div>
+                        <div className="rg-input-box">
+                              {/* <label htmlFor="">Phone Number</label> */}
+                              <input 
+                                    requiredtype="text" required placeholder='Mã nhân viên' name='maNV'
+                                    value={employeeCode}
+                                    onChange={(e) => setEmployeeCode(e.target.value)}
+                                    />
                         </div>
 
-                        
-
+                        <div className="rg-input-box">
+                              {/* <label htmlFor="">Phone Number</label> */}
+                              <input 
+                                    requiredtype="text" placeholder='Biển số xe (nếu có)' name='biensoxe'
+                                    value={licensePlates}
+                                    onChange={(e) => setLicensePlates(e.target.value)}
+                                    />
+                        </div>
+ 
                         <div className="rg-button flex-center">
                               <button className='login-button btn-hover' onClick={registerUser}>Register</button>
                         </div>
