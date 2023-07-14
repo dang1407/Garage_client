@@ -83,4 +83,55 @@ header {
       display: block;
 }
 
+.userBox {
+      height: 64px;
+      width: 80px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
 
+.userBox svg {
+      display: inline-block;
+      line-height: 64px;
+}
+
+.userBox:hover .userSubbox {
+      display: block;
+}
+
+.userSubbox {
+      position: absolute;
+      display: none;
+      top: 64px;
+      right: 0;
+      width: 150px;
+      background-color: #000;
+}
+
+.userSubbox li {
+      width: 150px;
+}
+
+.userSubbox a {
+      display: block;
+      color: #fff;
+      padding: 3px 10px;
+}
+
+.userSubbox button {
+      display: block;
+      width: 100%;
+      color: #fff;
+      padding: 3px 10px;
+      text-transform: uppercase;
+      font-weight: 600;
+      text-align: left;
+}
+
+.userSubbox a:hover,
+.userSubbox button:hover {
+      background-color: #43a809;
+      color: #000;
+}
