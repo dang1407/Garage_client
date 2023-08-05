@@ -14,6 +14,9 @@ import AppWrapper from './Token/AppWrapper';
 import EmployeeInf from './components/ListEmployees/EmployeeInf'
 import DeleteQuestion from './components/ListEmployees/DeleteQuestion';
 import Alert from './components/Alert/Alert'
+import IsLoading from './components/IsLoading/IsLoading';
+import MyProfile from './pages/MyProfile/MyProfile';
+import ParkingFeeIn from './pages/ParkingFee/ParkingFeeIn';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -28,6 +31,9 @@ root.render(
         <Route path='/employeeinf' element={<EmployeeInf />} ></Route>
         <Route path='/deleteimage' element={<DeleteQuestion />}></Route>
         <Route path='/alert' element={<Alert /> } ></Route>
+        <Route path='/isloading' element={<IsLoading />}></Route>
+        <Route path='/myprofile' element={<MyProfile/>}></Route>
+        <Route path='/parkingfeein' element = {<ParkingFeeIn />} ></Route>
         <Route path='/' element={<Home />}></Route>
       </Routes>
       </AppWrapper>

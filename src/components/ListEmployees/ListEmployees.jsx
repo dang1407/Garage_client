@@ -228,7 +228,7 @@ const ListEmployees = () => {
            {
             pageNumbers.map((page, index) => (
               // console.log(page)
-              <div key={index} onClick={() => getCurrentPage(index)}> 
+              <div className="page-number" key={index} onClick={() => getCurrentPage(index)}> 
                 <p> {page} </p> 
               </div>
             ))

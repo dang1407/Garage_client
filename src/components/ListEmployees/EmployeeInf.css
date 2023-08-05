@@ -54,9 +54,17 @@
       margin: 0 var(--margin-RL-flex-item);
 }
 .emp-image-thumb {
-      width: 150px;
+      width: 300px;
 }
 
+.emp-image-thumb img {
+      width: 200px;
+}
+
+.emp-image-thumb input {
+      border: none;
+      margin-top: 30px;
+}
 hr {
       color: #ccc;
       margin: 20px 0;
@@ -85,8 +93,10 @@ hr {
       
 }
 
-.emp-thumb-inf-input-box input {
+.emp-thumb-inf-input-box input,
+.emp-thumb-inf-input-box select {
       width: 200px;
+      padding: 5px;
 }
 
 .emp-inf-buttons {

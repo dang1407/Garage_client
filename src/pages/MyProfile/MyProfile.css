@@ -1,0 +1,18 @@
+.my-profile-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 40px;
+}
+.my-profile {
+      animation: none;
+}
+
+/* .emp-thumb-inf-input-box {
+      display: block;
+} */
+
+.my-profile-address-box label{
+      width: 150px;
+      font-weight: bold;
+}

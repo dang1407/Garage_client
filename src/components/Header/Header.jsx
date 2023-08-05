@@ -37,10 +37,18 @@ const Header = ({isLogined, role}) => {
               <li className={`${styles.homeTextCenter}`}><a href="#"className=' h-6 inline-block'>Địa chỉ</a></li>
               <li className={`${styles.homeTextCenter}`}><a href="#"className=' h-6 inline-block'>Phương hướng phát triển</a></li>
               {
-                (role === 'admin') &&
+                (role === 'admin') && 
                 <li className={`${styles.homeTextCenter}`}><a style={{cursor: "pointer"}} onClick={handleGoToListEmployee} className=' h-6 inline-block'>Danh sách nhân viên</a></li>
               }
-            </ul>
+              { 
+                isLogined &&
+                <li className={`${styles.homeTextCenter}`}><Link style={{cursor: "pointer"}} to='/parkingfeein' className=' h-6 inline-block'>Đưa xe vào bãi</Link></li>
+              }
+              { 
+                isLogined &&
+                <li className={`${styles.homeTextCenter}`}><Link style={{cursor: "pointer"}} to='/parkingfeeout' className=' h-6 inline-block'>Lấy xe ra khỏi bãi</Link></li>
+              }
+              </ul>
           </li>
         </ul>
       </div>
@@ -60,7 +68,7 @@ const Header = ({isLogined, role}) => {
               <form className={`${styles.userBox}`}> 
                   <FaUserCircle className='user-icon'/> 
                   <ul className={`${styles.userSubbox}`}>
-                    <li><Link >My Profile</Link></li>
+                    <li><Link to='/myprofile'>My Profile</Link></li>
                     <li><button  onClick={logOut}>Logout</button></li>
                   </ul>
               </form>  

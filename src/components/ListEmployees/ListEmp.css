@@ -72,3 +72,8 @@ h1 {
   align-items: center;
   font-size: 20px;
 }
+
+.page-number:hover {
+  text-decoration: underline;
+  color: rgb(69, 128, 160);
+} 

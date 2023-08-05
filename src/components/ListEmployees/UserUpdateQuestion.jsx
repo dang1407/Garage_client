@@ -4,13 +4,13 @@ import axios from "axios";
 import Update from "../../assets/images/update.png";
 import Alert from "../Alert/Alert";
 import IsLoading from "../IsLoading/IsLoading";
-const UpdateQuestion = ({ close, formData, avatar, message}) => {
+const UserUpdateQuestion = ({ close, formData, avatar, message}) => {
   const [showAlert, setShowAlert] = useState(false)
   const [result, setResult] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const accessToken = localStorage.getItem('accessToken')
 
-  async function updateEmployee(){
+  async function updateUser(){
     setIsLoading(true)
     console.log(formData)
     let checkImage = false;
@@ -22,16 +22,20 @@ const UpdateQuestion = ({ close, formData, avatar, message}) => {
       const responeImage = await axios.post('http://localhost:5000/api/uploadavatar', newImageFormData)
       if(responeImage.data.success === true){
         checkImage = true
+      } else {
+            setResult({success: false, message: "Có lỗi xảy ra!"})
+            setShowAlert(true)
+            return;
       }
     }
     
-      const respone = await axios.put('http://localhost:5000/api/adminupdateacc', formData, {
+      const respone = await axios.put('http://localhost:5000/api/userupdateacc', formData, {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
       });
       setIsLoading(false)
-      if(respone.data.success === true || checkImage){
+      if(respone.data.success === true){
             setResult({success: true, message: "Chỉnh sửa thông tin thành công!"})
       } else {
             setResult({success: false, message: "Có lỗi xảy ra!"})
@@ -39,7 +43,7 @@ const UpdateQuestion = ({ close, formData, avatar, message}) => {
       setShowAlert(true)
       // window.location.reload()
   } 
-  function closeUpdateQuestion(){
+  function closeUserUpdateQuestion(){
 //     setShowAlert(false)
     close();
     window.location.reload();
@@ -52,13 +56,13 @@ const UpdateQuestion = ({ close, formData, avatar, message}) => {
         {/* </div> */}
         <figcaption>{message}</figcaption>
         <div className="del-ques-button-box">
-          <button className="emp-inf-button delete" onClick={() => updateEmployee()}>Có</button>
+          <button className="emp-inf-button delete" onClick={() => updateUser()}>Có</button>
           <button className="emp-inf-button update" onClick={close}>Không</button>
         </div>
       </figure>
 
       {
-        showAlert && <Alert result = {result} onclose={() => closeUpdateQuestion()} />
+        showAlert && <Alert result = {result} onclose={() => closeUserUpdateQuestion()} />
       }
       {
         isLoading && <IsLoading />
@@ -67,4 +71,4 @@ const UpdateQuestion = ({ close, formData, avatar, message}) => {
   );
 };
 
-export default UpdateQuestion;
+export default UserUpdateQuestion;

@@ -29,7 +29,7 @@ const Register = () => {
             const {firstName, lastName, ...otherInf} = formData;
             const {vehicle, licensePlates, ...checkData} = formData
             const hasEmptyvalues = Object.values(checkData).some(value => value === "")
-            if(hasEmptyvalues || !(vehicle === "" && licensePlates === "")){
+            if(hasEmptyvalues || ((vehicle !== "Xe đạp") && (vehicle !== "") && licensePlates === "") || (licensePlates !== "" && vehicle === "")){
                   console.log(formData)
                   console.log(hasEmptyvalues)
                   alert("Bạn chưa nhập đủ thông tin")
@@ -159,11 +159,15 @@ const Register = () => {
 
                         <div className="name-box">
                               {/* <label htmlFor="">Phone Number</label> */}
-                              <input 
-                                    requiredtype="text" placeholder='Loại xe (nếu có)' name='biensoxe'
-                                    value={formData.vehicle}
+                              <select 
+                                    name="workPart" id="" style={{color: '#888'}}
                                     onChange={(e) => setFormData({...formData, vehicle: e.target.value})}
-                                    />
+                                    >
+                                    <option value="" >--- Loại phương tiện (nếu có) ---</option>
+                                    <option value="Xe đạp">Xe đạp</option>
+                                    <option value="Xe máy">Xe máy</option>
+                                    <option value="Ô tô">Ô tô</option>
+                              </select>
                               <input 
                                     requiredtype="text" placeholder='Biển số xe (nếu có)' name='biensoxe'
                                     value={formData.licensePlates}
