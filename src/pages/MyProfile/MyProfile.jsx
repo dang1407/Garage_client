@@ -4,14 +4,18 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import axios from "axios";
 import UserUpdateQuestion from "../../components/ListEmployees/UserUpdateQuestion";
 import "./MyProfile.css";
+import Alert from "../../components/Alert/Alert";
 import { Link } from "react-router-dom";
 const MyProfile = () => {
   const [role, setRole] = useState("user");
-  const [showDeleteQuestion, setShowDeleteQuestion] = useState(false);
-  const [idDelete, setIdDelete] = useState(null);
+  // const [showDeleteQuestion, setShowDeleteQuestion] = useState(false);
+  // const [idDelete, setIdDelete] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
+  const [alertResult, setAlertResult] = useState({});
   const [showUserUpdateQuestion, setShowUserUpdateQuestion] = useState(false);
-  const [message, setMessage] = useState("Bạn có chắc chắn muốn thay đổi những thông tin này không?")
+  const [message, setMessage] = useState(
+    "Bạn có chắc chắn muốn thay đổi những thông tin này không?"
+  );
   const [user, setUser] = useState({
     email: "",
     name: "",
@@ -64,7 +68,19 @@ const MyProfile = () => {
   //   window.location.reload();
   // }
   function sendUpdateEmp() {
-    console.log("Call");
+    // console.log("Call");
+    if (
+      (formData.vehicle === "Xe đạp" && formData.licensePlates !== "Không") ||
+      (formData.vehicle !== "Xe đạp" &&
+        formData.licensePlates === "Chưa đăng ký")
+    ) {
+      setAlertResult({
+        success: false,
+        message: "Bạn nhập sai thông tin biển số xe và loại xe",
+      });
+      setShowAlert(true);
+      return;
+    }
     setShowUserUpdateQuestion(true);
   }
 
@@ -143,7 +159,11 @@ const MyProfile = () => {
       <div className="my-profile-box">
         <form action="" className="emp-inf-form my-profile">
           <h1>
-            Thông tin của tôi <Link to='/'> <AiFillCloseCircle /></Link> 
+            Thông tin của tôi{" "}
+            <Link to="/">
+              {" "}
+              <AiFillCloseCircle />
+            </Link>
           </h1>
 
           <hr />
@@ -203,7 +223,7 @@ const MyProfile = () => {
                   }
                 />
               </div>
-              
+
               <div className="emp-thumb-inf-input-box">
                 <label htmlFor="">Giới tính: </label>
                 <p className="emp-inf-name">{user.gender}</p>
@@ -270,15 +290,20 @@ const MyProfile = () => {
                     setFormData({ ...formData, vehicle: e.target.value })
                   }
                 /> */}
-                <select             className="input-data-emp-inf"
-                                    name="workPart" id="" style={{display: "none"}}
-                                    onChange={(e) => setFormData({...formData, vehicle: e.target.value})}
-                                    >
-                                    <option value="" >Không</option>
-                                    <option value="Xe đạp">Xe đạp</option>
-                                    <option value="Xe máy">Xe máy</option>
-                                    <option value="Ô tô">Ô tô</option>
-                              </select>
+                <select
+                  className="input-data-emp-inf"
+                  name="workPart"
+                  id=""
+                  style={{ display: "none" }}
+                  onChange={(e) =>
+                    setFormData({ ...formData, vehicle: e.target.value })
+                  }
+                >
+                  <option value="">Không</option>
+                  <option value="Xe đạp">Xe đạp</option>
+                  <option value="Xe máy">Xe máy</option>
+                  <option value="Ô tô">Ô tô</option>
+                </select>
               </div>
 
               <div className="emp-thumb-inf-input-box">
@@ -372,7 +397,9 @@ const MyProfile = () => {
             </div> */}
         </form>
       </div>
-
+      {showAlert && (
+        <Alert result={alertResult} onclose={() => setShowAlert(false)} />
+      )}
       {showUserUpdateQuestion && (
         <UserUpdateQuestion
           formData={formData}

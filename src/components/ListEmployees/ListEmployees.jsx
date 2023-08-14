@@ -13,7 +13,7 @@ import Header from "../Header/Header";
 import DeleteQuestion from "./DeleteQuestion";
 import { GoTriangleRight, GoTriangleLeft } from "react-icons/go";
 const ListEmployees = () => {
-  const [allUsers, setAllUsers] = useState({})
+  const [allUsers, setAllUsers] = useState({});
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageNumbers, setPageNumbers] = useState([]);
@@ -41,12 +41,12 @@ const ListEmployees = () => {
     // console.log(respone);
     if (respone.data.success === true) {
       setTotalPages(Math.ceil(respone.data.users.length / itemsPerPage));
-      setAllUsers(respone.data.users)
+      setAllUsers(respone.data.users);
       const startIndex = (currentPage - 1) * itemsPerPage; // Vị trí bắt đầu của trang hiện tại
       const endIndex = startIndex + itemsPerPage; // Vị trí kết thúc của trang hiện tại
       setUsersPage(respone.data.users.slice(startIndex, endIndex));
       createPageNumber(Math.ceil(respone.data.users.length / itemsPerPage));
-      console.log(respone.data.users);
+      // console.log(respone.data.users);
     } else {
       setUsersPage(null);
     }
@@ -87,28 +87,40 @@ const ListEmployees = () => {
   function prevPage() {
     if (currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
-      setUsersPage(allUsers.slice((currentPage - 2)*itemsPerPage, (currentPage - 2)*itemsPerPage + itemsPerPage))
+      setUsersPage(
+        allUsers.slice(
+          (currentPage - 2) * itemsPerPage,
+          (currentPage - 2) * itemsPerPage + itemsPerPage
+        )
+      );
     }
   }
 
   function nextPage() {
     if (currentPage < totalPages) {
       setCurrentPage((prevPage) => prevPage + 1);
-      setUsersPage(allUsers.slice(currentPage * itemsPerPage, currentPage * itemsPerPage + itemsPerPage))
+      setUsersPage(
+        allUsers.slice(
+          currentPage * itemsPerPage,
+          currentPage * itemsPerPage + itemsPerPage
+        )
+      );
     }
   }
 
   function createPageNumber(totalPages) {
-    let result = []
-    for(let i = 1; i <= totalPages; i++){
+    let result = [];
+    for (let i = 1; i <= totalPages; i++) {
       result.push(i);
     }
-    setPageNumbers(result)
+    setPageNumbers(result);
   }
 
-  function getCurrentPage(index){
-    setCurrentPage(index)
-    setUsersPage(allUsers.slice((index)*itemsPerPage, (index)*itemsPerPage + itemsPerPage))
+  function getCurrentPage(index) {
+    setCurrentPage(index);
+    setUsersPage(
+      allUsers.slice(index * itemsPerPage, index * itemsPerPage + itemsPerPage)
+    );
   }
   return (
     // <div className={`${styles.listEmpContainer} text-flex-center`}>
@@ -225,14 +237,16 @@ const ListEmployees = () => {
             <div className="icons-box" onClick={prevPage}>
               <GoTriangleLeft />
             </div>
-           {
-            pageNumbers.map((page, index) => (
+            {pageNumbers.map((page, index) => (
               // console.log(page)
-              <div className="page-number" key={index} onClick={() => getCurrentPage(index)}> 
-                <p> {page} </p> 
+              <div
+                className="page-number"
+                key={index}
+                onClick={() => getCurrentPage(index)}
+              >
+                <p> {page} </p>
               </div>
-            ))
-           }
+            ))}
             <div className="icons-box" onClick={nextPage}>
               <GoTriangleRight />
             </div>

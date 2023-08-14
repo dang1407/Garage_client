@@ -5,40 +5,52 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import "./UpdatePassword.css";
 import axios from "axios";
 import AccessTokenContext from "../../Token/AccessTokenContext";
-
-
+import Alert from "../../components/Alert/Alert";
 const UpdatePassword = () => {
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertResult, setAlertResult] = useState({
+    success: true,
+    message: "",
+  });
   const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [rePassword, setRePassword] = useState();
-  const {accessToken} = useContext(AccessTokenContext)
-  console.log(accessToken)
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    rePassword: "",
+    authorCode: "",
+  });
+  const [accessToken] = useState(localStorage.getItem("accessToken"));
+  console.log(accessToken);
   async function updateUser(event) {
     event.preventDefault();
-    if (password !== rePassword) {
+    if (formData.password !== formData.rePassword) {
       alert("Mật khẩu và nhập lại mật khẩu không khớp!");
       return;
     }
-    
-    const respone = await axios.put('http://localhost:5000/api/updateacc', {
-      email,
-      password
-    }, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
-    })
 
-    console.log(respone.data.status);
-    if(respone.data.status === "OK"){
-      alert("Cập nhật mật khẩu thành công!");
-    } else {
-      if(respone.data.error === "Bạn đã nhập mật khẩu cũ"){
-        alert("Bạn đã nhập mật khẩu cũ");
+    try {
+      const respone = await axios.put(
+        "http://localhost:5000/api/updateacc",
+        {
+          formData,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      console.log(respone.data.status);
+      if (respone.data.status === "OK") {
+        alert("Cập nhật mật khẩu thành công!");
       } else {
-        alert("Email chưa đăng kí toàn khoản!");
+        if (respone.data.error === "Bạn đã nhập mật khẩu cũ") {
+          alert("Bạn đã nhập mật khẩu cũ");
+        } else {
+          alert("Email chưa đăng kí toàn khoản!");
+        }
       }
-    }
+    } catch (error) {}
   }
   return (
     <div className="upd-form-box">
@@ -52,7 +64,9 @@ const UpdatePassword = () => {
               <input
                 type="email"
                 placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
               />
             </div>
 
@@ -61,7 +75,9 @@ const UpdatePassword = () => {
               <input
                 type="password"
                 placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
               />
             </div>
 
@@ -70,7 +86,19 @@ const UpdatePassword = () => {
               <input
                 type="password"
                 placeholder="Password"
-                onChange={(e) => setRePassword(e.target.value)}
+                onChange={(e) =>
+                  setFormData({ ...formData, rePassword: e.target.value })
+                }
+              />
+            </div>
+            <div className="up-ip-box">
+              <label htmlFor="">Nhập mã xác nhận</label>
+              <input
+                type="password"
+                placeholder="Password"
+                onChange={(e) =>
+                  setFormData({ ...formData, authorCode: e.target.value })
+                }
               />
             </div>
           </div>
@@ -83,6 +111,9 @@ const UpdatePassword = () => {
           </button>
         </div>
       </form>
+      {showAlert && (
+        <Alert result={alertResult} onclose={() => setShowAlert(false)} />
+      )}
     </div>
   );
 };

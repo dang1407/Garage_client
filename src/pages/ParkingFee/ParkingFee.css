@@ -1,0 +1,86 @@
+#garagemap-container {
+  position: relative;
+  background-color: #ccc;
+  /* display: flex;
+      flex-direction: column;
+      align-items: center; */
+  padding-left: 230px;
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+#garagemap-container img {
+  width: 1000px;
+}
+
+#garagemap-container input[type="checkbox"] {
+  position: absolute;
+  /* top: 99px;
+      left: 64px; */
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
+.comein-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.form-comein {
+  position: relative;
+}
+
+.close-comein-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.close-comein-box svg {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.close-comein-box svg:hover {
+  color: red;
+}
+
+.search-input {
+  display: inline-block;
+  width: 350px;
+  height: 36px;
+  padding: 0px 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.search-input::placeholder {
+  color: #999999;
+  font-size: 14px;
+}
+.search-input:hover {
+  background-color: #e6e6e6;
+  /* cursor: pointer; */
+}
+.search-input:focus {
+  border: 1px solid #50b83c;
+  outline: none;
+}
+
+.search-container {
+  width: 300px;
+  /* display: flex;
+  flex-direction: column-reverse; */
+}
+
+.search-container label {
+  display: block;
+  font-weight: bold;
+}

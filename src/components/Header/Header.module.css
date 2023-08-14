@@ -102,6 +102,7 @@ header {
 }
 
 .userSubbox {
+      z-index: 10;;
       position: absolute;
       display: none;
       top: 64px;
